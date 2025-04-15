@@ -2,7 +2,7 @@
 FROM python:3.13-alpine
 
 # Install necessary Python packages
-RUN pip install html5lib html2text requests pyOpenSSL
+RUN pip install html5lib html2text requests pyOpenSSL psutil
 
 #Install wget to pull the latest version of gogrepoc.py
 RUN apk add --no-cache wget
