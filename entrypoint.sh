@@ -1,7 +1,8 @@
 #!/bin/sh
 
-# Pull the latest version of the gogrepoc.py file if we need
-wget -N https://raw.githubusercontent.com/Kalanyr/gogrepoc/refs/heads/master/gogrepoc.py
+# Pull the latest version of the gogrepoc.py file if we need. Saving in output folder to always have the existing manifest and no need to re-download it every time.
+wget -N -O /gogrepocdock/downloads/gogrepoc.py https://raw.githubusercontent.com/Kalanyr/gogrepoc/refs/heads/master/gogrepoc.py
+cd /gogrepocdock/downloads
 
 # Check if logindata is provided
 if [ -z "$goguser" ] || [ -z "$gogpassword" ]; then
