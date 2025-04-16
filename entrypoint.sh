@@ -25,13 +25,22 @@ esac
 
 # Function to execute the commands
 execute_commands() {
-  # Run the login command
-  # Only login if the token file doesn't exist
-  if [ ! -f /gogrepocdock/downloads/gog-token.dat ]; then
+  # Only login if the token file doesn't exist or is older than 1 hour
+  token_file="/gogrepocdock/downloads/gog-token.dat"
+  max_age_seconds=3600
+
+  if [ ! -f "$token_file" ]; then
     echo "Token not found. Logging in..."
     python gogrepoc.py login $goguser $gogpassword
   else
-    echo "Token file found. Skipping login."
+    file_age=$(( $(date +%s) - $(stat -c %Y "$token_file") ))
+    if [ "$file_age" -ge "$max_age_seconds" ]; then
+      echo "Token is older than 1 hour. Deleting and logging in again..."
+      rm -f "$token_file"
+      python gogrepoc.py login $goguser $gogpassword
+    else
+      echo "Token is still valid. Skipping login."
+    fi
   fi
   python gogrepoc.py update $updatecommands
   python gogrepoc.py download $downloadcommands /gogrepocdock/downloads
