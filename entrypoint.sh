@@ -26,7 +26,13 @@ esac
 # Function to execute the commands
 execute_commands() {
   # Run the login command
-  python gogrepoc.py login $goguser $gogpassword
+  # Only login if the token file doesn't exist
+  if [ ! -f /gogrepocdock/downloads/gog-token.dat ]; then
+    echo "Token not found. Logging in..."
+    python gogrepoc.py login $goguser $gogpassword
+  else
+    echo "Token file found. Skipping login."
+  fi
   python gogrepoc.py update $updatecommands
   python gogrepoc.py download $downloadcommands /gogrepocdock/downloads
 }
