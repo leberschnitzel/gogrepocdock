@@ -4,7 +4,7 @@ FROM python:3.9.22-alpine
 #Install wget to pull the latest version of gogrepoc.py
 RUN pip install --upgrade pip
 RUN apk add --no-cache wget
-RUN apk add gcc musl-dev linux-headers
+RUN apk add --no-cache gcc musl-dev linux-headers
 
 # Install necessary Python packages
 RUN pip install html5lib html2text requests pyOpenSSL psutil
