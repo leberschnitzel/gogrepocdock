@@ -1,20 +1,16 @@
 # Use the base Python image
 FROM python:3.9.22-alpine
 
-#Install wget to pull the latest version of gogrepoc.py
-RUN pip install --upgrade pip
-RUN apk add --no-cache wget
-RUN apk add --no-cache gcc musl-dev linux-headers
-
-# Install necessary Python packages
-RUN pip install html5lib html2text requests pyOpenSSL psutil
-
+# Install necessary tools and packages
+RUN pip install --upgrade pip && \
+    apk add --no-cache wget gcc musl-dev linux-headers && \
+    pip install html5lib html2text requests pyOpenSSL psutil
 
 # Create directories for the application and downloads
 RUN mkdir -p /gogrepocdock/downloads
 
 # Copy the entry-point script into the container
-COPY entrypoint.sh /gogrepocdock
+COPY entrypoint.sh /gogrepocdock/
 
 # Make the entry-point script executable
 RUN chmod +x /gogrepocdock/entrypoint.sh
