@@ -39,7 +39,8 @@ services:
             - updatecommands=-os windows linux -lang en #Configuration for update commands. See https://github.com/Kalanyr/gogrepoc for information (required).
             - downloadcommands=-dryrun #Configuration for download commands (optional). Remove -dryrun when you're ready to start actual downloads (optional).
             - repeat=1w #Interval for syncing. Use formats like 1w for 1 week or 3d for 3 days Default is 1w (optional)
-            - cleanandtrash=false #if set to true it will run the "clean" and "trash" commands of the script to remove  files not known by the manifest
+            - clean=true #if set to true it will run the "clean" commands to find files unknown to the manifest
+            - trash=false #if set to true it will run the "trash" commands, deleting the previousely found files.
 ```
 
 3. **Create the Downloads Directory**

@@ -45,8 +45,11 @@ execute_commands() {
   python gogrepoc.py update $updatecommands
   python gogrepoc.py download $downloadcommands /gogrepocdock/downloads
   # Additional commands to be executed only if cleanandtrash is true
-if [ "$cleanandtrash" = "true" ]; then
+if [ "$clean" = "true" ]; then
   python gogrepoc.py clean /gogrepocdock/downloads
+
+fi
+if [ "$trash" = "true" ]; then
   python gogrepoc.py trash /gogrepocdock/downloads
 fi
 }
