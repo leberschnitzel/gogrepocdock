@@ -1,5 +1,5 @@
 # Use the base Python image
-FROM python:3.13.12-alpine
+FROM python:3.13-alpine
 
 # Install necessary tools and packages
 RUN pip install --upgrade pip && \
